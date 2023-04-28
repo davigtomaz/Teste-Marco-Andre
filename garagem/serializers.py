@@ -12,3 +12,7 @@ class CategoriaSerializer(ModelSerializer):
         model = Categoria 
         fields = "__all__"
 
+class AcessorioSerializer(ModelSerializer):
+    class Meta: 
+        model = Acessorio
+        fields = "__all__"
