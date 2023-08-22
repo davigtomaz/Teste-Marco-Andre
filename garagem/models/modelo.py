@@ -7,3 +7,8 @@ class Modelo(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, related_name="modelo")
     marca = models.ForeignKey(Marca, on_delete=models.PROTECT, related_name="modelo")
 
+
+    def __str__(self):
+        return self.nome
+
+

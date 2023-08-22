@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django_extensions",
+    'uploader',
+    'usuario',
+    "drf_spectacular",
     'garagem',
     'rest_framework',
     "corsheaders",
@@ -71,6 +75,10 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
@@ -83,6 +91,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Garagem API",
+    "DESCRIPTION": "API para gerenciamento de uma garagem, incluindo endpoints e documentação.",
+    "VERSION": "1.0.0",
+}
+
 
 
 # Password validation
@@ -127,3 +143,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+AUTH_USER_MODEL = "usuario.Usuario"
+
+# App Uploader settings
+MEDIA_URL = "http://localhost:8000/media/"
+MEDIA_ENDPOINT = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+FILE_UPLOAD_PERMISSIONS = 0o640
